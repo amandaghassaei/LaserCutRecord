@@ -29,6 +29,7 @@ float innerHole = 0.286;//diameter of center hole in inches
 float innerRad = 2.25;//radius of innermost groove in inches
 float outerRad = 5.75;//radius of outermost groove in inches
 boolean cutlines = true;//cut the inner and outer perimeters
+boolean drawBoundingBox = false;//draw a rect around the whole thing (helps with alignment)
 int numGroovesPerFile = 20;//many lasers will choke if you send them all the data at once, this number spits the cutting path into several files taht can be sent to the laser cutter in series, decrease this number to lower the amount of data on each section
 
 
@@ -112,6 +113,7 @@ void setup(){
     numGrooves++;
     if (numGrooves%numGroovesPerFile==0){
       endShape();
+      if (drawBoundingBox) rect(0,0,cutterWidth*scaleNum,cutterHeight*scaleNum);
       endRecord();
       String fileNumber = str(numGrooves/numGroovesPerFile);
       beginRecord(PDF, filename + fileNumber + ".pdf");//save as PDF
