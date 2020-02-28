@@ -32,13 +32,18 @@ boolean cutlines = true;//cut the inner and outer perimeters
 boolean drawBoundingBox = false;//draw a rect around the whole thing (helps with alignment)
 int numGroovesPerFile = 20;//many lasers will choke if you send them all the data at once, this number spits the cutting path into several files taht can be sent to the laser cutter in series, decrease this number to lower the amount of data on each section
 
+// constants
+int scaleNum = 72;//scale factor of vectors (default 72 dpi)
+float secPerMin = 60;
 
+void settings(){
+  
+  //set sketch size
+  size(cutterWidth*scaleNum,cutterHeight*scaleNum);
+  
+}
 
 void setup(){
-  
-  //constants
-  float secPerMin = 60;
-  int scaleNum = 72;//scale factor of vectors (default 72 dpi)
   
   //storage variables
   float radCalc;
@@ -62,7 +67,6 @@ void setup(){
     filename = filename.substring(0, dotPos);
   
   //open pdf file
-  size(cutterWidth*scaleNum,cutterHeight*scaleNum);
   int section = 1;
   beginRecord(PDF, filename + "0.pdf");//save as PDF
   background(255);//white background
@@ -191,5 +195,3 @@ float[] processAudioData(){
   
   return audioData;
 }
-
-

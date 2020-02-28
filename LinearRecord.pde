@@ -26,15 +26,22 @@ float amplitude = 5.0;//in pixels - you might want to change this
 
 float xScale = 1.0;//in pixels - depending on how fast you are reading the record, you will want to change this
 
+//constants
+float scaleNum = 72.0;//scale factor of vectors (default 72 dpi)
+
+void settings(){
+  
+    size(int(cutterWidth*scaleNum),int(cutterHeight*scaleNum));
+    
+}
+
 void setup(){
   
   float[] songData = processAudioData();
   
-  float scaleNum = 72.0;//scale factor of vectors (default 72 dpi)
   amplitude = amplitude/dpi*scaleNum;
   xScale = xScale/dpi*scaleNum;
   
-  size(int(cutterWidth*scaleNum),int(cutterHeight*scaleNum));
   
   
   //change extension of file name
@@ -93,5 +100,3 @@ float[] processAudioData(){
   
   return audioData;
 }
-
-
